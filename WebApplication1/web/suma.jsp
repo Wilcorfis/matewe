@@ -1,0 +1,30 @@
+<%-- 
+    Document   : suma
+    Created on : 17/09/2018, 04:51:40 PM
+    Author     : USUARIO
+--%>
+
+<%@page import="Servletsuma.suma"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="CSS/cssinput.css">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Hola</title>
+    </head>
+    <body>
+        <h1>Sumas</h1>
+        <h1>Rango</h1>
+
+        <form action="suma" method="GET">
+
+            <input  type="text" name="numero" value=<%out.print(suma.rango);%> autofocus>
+            <input  type="submit" value="Seleccionar rango"><br>
+
+            <a href='http://localhost:8090/IntegracioMatewe/index.jsp'>Menu principal</a>
+        </form>
+            <iframe allow="autoplay" width="600" height="400" src="https://www.youtube.com/embed/7gYzNGlsFcc?modestbranding=1&amp;fs=0&amp;rel=0&amp;hd=1&amp;disablekb=0&amp;showinfo=0&amp;iv_load_policy=0&amp;autoplay=0&amp;loop=0&amp;controls=0" frameborder="0" allowfullscreen></iframe>
+
+    </body>
+</html>

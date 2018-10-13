@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="iso-8859-15" />
+    <title>Jugando con el Canvas</title>
+    <style type="text/css">
+        canvas {
+            position: relative;
+        }
+
+        .precarga {
+            position: absolute;
+            left: -9999px;
+        }
+    </style>
+</head>
+
+<body onload="init()">
+    <div id="wrapper"></div>
+    <iframe id='frm1' src='otro.html' marginwidth='0' marginheight='0' name='ventana_iframe' scrolling='no'
+        frameborder='0' width='90' height='500'>
+    </iframe>
+    <iframe id='frm1' src='otro2.html' marginwidth='0' marginheight='0' name='ventana_iframe' scrolling='no'
+        frameborder='0' width='90' height='500'>
+    </iframe>
+    <iframe id='frm1' src='otro3.html' marginwidth='0' marginheight='0' name='ventana_iframe' scrolling='no'
+        frameborder='0' width='90' height='500'>
+    </iframe>
+    <iframe id='frm1' src='otro4.html' marginwidth='0' marginheight='0' name='ventana_iframe' scrolling='no'
+        frameborder='0' width='90' height='500'>
+    </iframe>
+    <iframe id='frm1' src='otro5.html' marginwidth='0' marginheight='0' name='ventana_iframe' scrolling='no'
+        frameborder='0' width='100' height='500'>
+    </iframe>
+    <iframe id='frm1' src='otro6.html' marginwidth='0' marginheight='0' name='ventana_iframe' scrolling='no'
+        frameborder='0' width='90' height='500'>
+    </iframe>
+    <iframe id='frm1' src='otro7.html' marginwidth='0' marginheight='0' name='ventana_iframe' scrolling='no'
+        frameborder='0' width='90' height='500'>
+    </iframe>
+    <iframe id='frm1' src='otro8.html' marginwidth='0' marginheight='0' name='ventana_iframe' scrolling='no'
+        frameborder='0' width='90' height='500'>
+    </iframe>
+    <iframe id='frm1' src='otro9.html' marginwidth='0' marginheight='0' name='ventana_iframe' scrolling='no'
+        frameborder='0' width='90' height='500'>
+    </iframe>
+    <iframe id='frm1' src='otro10.html' marginwidth='0' marginheight='0' name='ventana_iframe' scrolling='no'
+        frameborder='0' width='90' height='500'>
+    </iframe>
+
+    <h1>JUEGO aaun no terminado USA LAS TECLAS IZQUIERDA DERECHA PARA MOVER EL POLLO</h1>
+
+</body>
+
+</html>
+<script>
+    var canvas = document.createElement('canvas');
+    var ctx = canvas.getContext('2d');
+    var imgList = new Array();
+    var wrapper = null;
+    var spriteIndex = 0;
+    var spriteX = 0;
+    var spriteY = 0;
+
+
+
+    /*el cambas ya esta constuido apartir de aqui es el elemento2*/
+    // asigno eventos de las teclas
+    document.onkeydown = function (event) {
+        var teclaC;
+
+        if (event == null) {
+            teclaC = window.event.keyCode;
+        }
+        else {
+            teclaC = event.keyCode;
+        }
+
+        switch (teclaC) {
+            case 39: animateFrame(1);
+                break;
+            case 37: animateFrame(-1);
+                break;
+            default: resetFrames();
+        }
+
+    }
+
+    document.onkeyup = function (e) {
+        resetFrames();
+    }
+
+    init = function () {
+        for (var i = 0; i < 7; ++i) {
+            imgList.push(new Image());
+            imgList[i].src = "frame" + i + ".jpg";
+        }
+
+        var img = document.createElement('IMG');
+        img.src = "frame1.jpg";
+        img.className = 'precarga';
+        img.elemento = imgList[0];
+
+        document.getElementsByTagName('BODY')[0].appendChild(img);
+
+        canvas.width = 1000;
+        canvas.height = 110;
+        img.onload = function () {
+            ctx.fillStyle = "rgb(255,255,255)";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.drawImage(this.elemento, 0, 0, this.width, this.height);
+            this.parentNode.removeChild(this);
+        }
+        wrapper = document.getElementById("wrapper");
+        wrapper.appendChild(canvas);
+
+    }
+
+    animateFrame = function (dir) {
+        if (dir > 0) {
+            spriteIndex = (spriteIndex >= 6) ? 0 : ++spriteIndex;
+            spriteX = (spriteX >= 900) ? 900 : spriteX + 20;
+        }
+        else {
+            spriteIndex = (spriteIndex <= 0) ? 6 : --spriteIndex;
+            spriteX = (spriteX <= 0) ? 0 : spriteX - 20;
+        }
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "rgb(255,255,255)";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(imgList[spriteIndex], spriteX, spriteY, imgList[spriteIndex].width, imgList[spriteIndex].height);
+
+    }
+
+    resetFrames = function () {
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        spriteIndex = 0;
+        ctx.fillStyle = "rgb(255,255,255)";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(imgList[spriteIndex], spriteX, spriteY, imgList[spriteIndex].width, imgList[spriteIndex].height);
+    }
+
+
+</script>
